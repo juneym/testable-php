@@ -13,16 +13,15 @@ $task4 = new \Demo\TaskObject("Build and Deploy");
 $task2->setDependency($task1);
 $task3->setDependency($task2);
 $task4->setDependency($task3);
-
 $coordinator = new \Demo\TaskCoordinator();
 
 //add task in an incorrect order
-//$coordinator->addTask($task1);
-//$coordinator->addTask($task4);
-//$coordinator->addTask($task3);
-//$coordinator->addTask($task2);
+$coordinator->addTask($task1);
+$coordinator->addTask($task4);
+$coordinator->addTask($task3);
+$coordinator->addTask($task2);
 
 //or just add the last task..
-$coordinator->addTask($task4);
+//$coordinator->addTask($task4);
 
 $coordinator->run();

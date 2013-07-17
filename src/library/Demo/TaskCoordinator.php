@@ -11,7 +11,9 @@ class TaskCoordinator  extends TaskAbstract {
     /**
      * Task Runner
      */
-    public function run() {
+    public function run($caller = null) {
+
+        $this->_taskName = get_class($this);
         foreach ($this->_taskQueue as $q) {
             $q->run($this);
         }
@@ -22,6 +24,14 @@ class TaskCoordinator  extends TaskAbstract {
      */
     public function clearTasks() {
         unset($this->_taskQueue);
+        $this->_taskQueue = array();
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaskCount() {
+        return count($this->_taskQueue);
     }
 
     /**
@@ -29,6 +39,19 @@ class TaskCoordinator  extends TaskAbstract {
      */
     public function addTask(TaskObject $t) {
         $this->_taskQueue[$t->getName()] = $t;
+    }
+
+    /**
+     * @param $name
+     * @throws Exception
+     */
+    public function getTask($name) {
+
+        if (!isset($this->_taskQueue[$name])) {
+            throw new Exception("Invalid Task: $name");
+        }
+
+        return $this->_taskQueue[$name];
     }
 
 }

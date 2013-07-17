@@ -3,22 +3,13 @@ namespace Demo;
 
 class TaskObject extends TaskAbstract {
 
-    private $_taskName = "";
-    private $_status;
-
-    public function __construct($taskName) {
+    public function __construct($taskName, $status = self::STATUS_READY ) {
         $this->_taskName = $taskName;
-        $this->_status = self::STATUS_READY;
+        $this->_status = $status;
     }
 
-    /**
-     * @return string
-     */
-    public function getName() {
-        return $this->_taskName;
-    }
 
-    public function run() {
+    public function run($caller = null) {
         if ($this->_status == self::STATUS_DONE) {
             return true;
         }
@@ -28,11 +19,17 @@ class TaskObject extends TaskAbstract {
         }
 
         //run dependency if available
-        if (!empty($this->dependency)) {
-            $this->dependency->run($this);
+        if (null != ($dep = $this->getDependency())) {
+            $dep->run($this);
+            unset($dep);
         }
 
-        echo "Running Task: {$this->_taskName} \n";
+        if (!empty($caller) && ($caller instanceof TaskAbstract)) {
+            echo " Caller Task: " . sprintf("%-40s", $caller->getName());
+        }
+
+        echo " -> Running Task: {$this->_taskName}\n" ;
+
         $this->_status = self::STATUS_DONE;
     }
 
