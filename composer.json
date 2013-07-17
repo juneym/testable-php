@@ -1,0 +1,6 @@
+{
+    "name" : "juneym/testable-php",
+    "require" : {
+        "phpunit/phpunit" : "3.7.*"
+    }
+}
