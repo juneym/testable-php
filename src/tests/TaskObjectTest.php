@@ -18,4 +18,38 @@ class TaskObjectTest extends PHPUnit_Framework_TestCase {
     public function testShouldHaveSameName() {
         $this->assertEquals("Task1", $this->_taskObj->getName());
     }
+
+    /**
+     * @expectedException  \Demo\CyclicDependencyException
+     */
+    public function testCantDoCyclicDependency() {
+
+        $this->_taskObj->setDependency($this->_taskObj);
+    }
+
+    /**
+     * @expectedException  \Demo\CyclicDependencyException
+     */
+    public function testCantDoCyclicDependencyScenario2() {
+        $task1 = new \Demo\TaskObject('Task1');
+        $task1->setDependency($this->_taskObj);
+        $this->_taskObj->setDependency($task1);
+    }
+
+
+    public function testCanConfigureDependency() {
+        $task2 = new \Demo\TaskObject('Task2');
+        $this->_taskObj->setDependency($task2);
+        $this->assertEquals($task2, $this->_taskObj->getDependency());
+    }
+
+
+    public function testStatusReadyByDefault() {
+        $this->assertEquals(\Demo\TaskAbstract::STATUS_READY, $this->_taskObj->getStatus());
+    }
+
+    public function testChangeStateAfterRun() {
+        $this->_taskObj->run(null);
+        $this->assertEquals(\Demo\TaskAbstract::STATUS_DONE, $this->_taskObj->getStatus());
+    }
 }

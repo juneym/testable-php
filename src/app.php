@@ -13,7 +13,7 @@ $task4 = new \Demo\TaskObject("Build and Deploy");
 $task2->setDependency($task1);
 $task3->setDependency($task2);
 $task4->setDependency($task3);
-$coordinator = new \Demo\TaskCoordinator();
+$coordinator = new \Demo\TaskCoordinator('TaskCoord1');
 
 //add task in an incorrect order
 $coordinator->addTask($task1);
