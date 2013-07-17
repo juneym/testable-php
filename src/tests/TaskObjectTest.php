@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__FILE__) . "/../../vendor/autoload.php";
 require_once dirname(__FILE__) . "/../library/autoloader.php";
 
 class TaskObjectTest extends PHPUnit_Framework_TestCase {
@@ -15,6 +16,6 @@ class TaskObjectTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testShouldHaveSameName() {
-        $this->assertEquals("Task1X", $this->_taskObj->getName());
+        $this->assertEquals("Task1", $this->_taskObj->getName());
     }
 }
