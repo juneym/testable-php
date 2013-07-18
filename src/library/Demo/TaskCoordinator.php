@@ -8,6 +8,10 @@ class TaskCoordinator  extends TaskAbstract {
      */
     private $_taskQueue;
 
+    public function __construct($name) {
+        $this->_taskName = $name;
+    }
+
     /**
      * Task Runner
      */
@@ -17,6 +21,8 @@ class TaskCoordinator  extends TaskAbstract {
         foreach ($this->_taskQueue as $q) {
             $q->run($this);
         }
+
+        return true;
     }
 
     /**
@@ -48,7 +54,7 @@ class TaskCoordinator  extends TaskAbstract {
     public function getTask($name) {
 
         if (!isset($this->_taskQueue[$name])) {
-            throw new Exception("Invalid Task: $name");
+            throw new InvalidTaskException("Invalid Task: $name");
         }
 
         return $this->_taskQueue[$name];

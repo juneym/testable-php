@@ -11,10 +11,10 @@ abstract class TaskAbstract {
     protected $_taskName = "";
 
 
-    abstract public function run($caller);
+    abstract public function run($caller  = null);
 
     public function getStatus() {
-        return $this->status;
+        return $this->_status;
     }
 
     /**
@@ -23,6 +23,10 @@ abstract class TaskAbstract {
      * @param TaskAbstract $task
      */
     public function setDependency(TaskAbstract $task) {
+
+        if (($task === $this) || ($task->getDependency() === $this) || ($this->getDependency() === $task)) {
+            throw new CyclicDependencyException("Can't depend on self");
+        }
         $this->_dependency = $task;
     }
 
