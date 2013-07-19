@@ -33,8 +33,8 @@
         <log type="tap" target="/tmp/logfile.tap"/>
         <log type="junit" target="/tmp/logfile.xml" logIncompleteSkipped="false"/>
         <log type="testdox-text" target="/tmp/testdox.txt"/>
-        --> 
-        <log type="coverage-xml" target="../../build/test-logs/code-coverage-report.xml"/>
+        -->
+        <log type="coverage-html" target="../../build/test-logs/code-coverage-report.html"/>
         <log type="json" target="../../build/test-logs/testable-php-log.json"/>
         <log type="testdox-html" target="../../build/test-logs/testdox.html"/>
     </logging>
