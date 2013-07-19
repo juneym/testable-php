@@ -49,6 +49,10 @@ class TaskCoordinatorTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($task1, $this->_taskCoord->getTask('Task1'));
     }
 
+    public function testCoordinatorTaskZero() {
+        $this->assertEquals(0, $this->_taskCoord->getTaskCount());
+    }
+
 
     public function testCanClearTask(){
         $task1 = new \Demo\TaskObject('Task1');

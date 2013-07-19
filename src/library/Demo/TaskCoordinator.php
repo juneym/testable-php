@@ -6,7 +6,7 @@ class TaskCoordinator  extends TaskAbstract {
     /**
      * @var array
      */
-    private $_taskQueue;
+    private $_taskQueue = array();
 
     public function __construct($name) {
         $this->_taskName = $name;
