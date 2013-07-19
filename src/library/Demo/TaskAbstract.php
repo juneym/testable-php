@@ -24,9 +24,9 @@ abstract class TaskAbstract {
      */
     public function setDependency(TaskAbstract $task) {
 
-//        if (($task === $this) || ($task->getDependency() === $this) || ($this->getDependency() === $task)) {
-//            throw new CyclicDependencyException("Can't depend on self");
-//        }
+        if (($task === $this) || ($task->getDependency() === $this) || ($this->getDependency() === $task)) {
+            throw new CyclicDependencyException("Can't depend on self");
+        }
         $this->_dependency = $task;
     }
 
