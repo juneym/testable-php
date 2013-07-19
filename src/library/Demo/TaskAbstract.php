@@ -5,6 +5,9 @@ abstract class TaskAbstract {
 
     const STATUS_READY = 1;
     const STATUS_DONE  = 2;
+    const STATUS_NOT_READY  = 3;
+    const TASK_ALREADY_DONE = 1;
+    const TASK_NOT_READY = 2;
 
     protected $_dependency;
     protected $_status;

@@ -11,11 +11,11 @@ class TaskObject extends TaskAbstract {
 
     public function run($caller = null) {
         if ($this->_status == self::STATUS_DONE) {
-            return true;
+            return self::TASK_ALREADY_DONE;
         }
 
         if ($this->_status != self::STATUS_READY) {
-            return false;
+            return self::TASK_NOT_READY;
         }
 
         //run dependency if available

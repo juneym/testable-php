@@ -52,4 +52,21 @@ class TaskObjectTest extends PHPUnit_Framework_TestCase {
         $this->_taskObj->run(null);
         $this->assertEquals(\Demo\TaskAbstract::STATUS_DONE, $this->_taskObj->getStatus());
     }
+
+    public function testTaskObjectStatusShouldBeDone() {
+        $this->_taskObj = new \Demo\TaskObject('Task11', \Demo\TaskAbstract::STATUS_DONE);
+
+        $this->assertEquals(\Demo\TaskAbstract::STATUS_DONE, $this->_taskObj->getStatus());
+    }
+
+    public function testTaskObjectStatusDoneWillNotRun() {
+        $this->_taskObj = new \Demo\TaskObject('Task11', \Demo\TaskAbstract::STATUS_DONE);
+        $this->assertEquals(\Demo\TaskAbstract::TASK_ALREADY_DONE, $this->_taskObj->run(null));
+    }
+
+    public function testTaskObjectStatusNotReadyWillNotRun() {
+        $this->_taskObj = new \Demo\TaskObject('Task11', \Demo\TaskAbstract::STATUS_NOT_READY);
+        $this->assertEquals(\Demo\TaskAbstract::TASK_NOT_READY, $this->_taskObj->run(null));
+    }
+
 }
