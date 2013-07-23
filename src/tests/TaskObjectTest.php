@@ -69,4 +69,11 @@ class TaskObjectTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals(\Demo\TaskAbstract::TASK_NOT_READY, $this->_taskObj->run(null));
     }
 
+
+    public function testCanRunDependency() {
+        $task2 = new \Demo\TaskObject('Task2');
+        $this->_taskObj->setDependency($task2);
+        $this->assertEquals(\Demo\TaskAbstract::STATUS_DONE, $this->_taskObj->run(null));
+    }
+
 }

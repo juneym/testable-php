@@ -31,6 +31,8 @@ class TaskObject extends TaskAbstract {
         echo " -> Running Task: {$this->_taskName}\n" ;
 
         $this->_status = self::STATUS_DONE;
+
+        return  self::STATUS_DONE;
     }
 
 }
